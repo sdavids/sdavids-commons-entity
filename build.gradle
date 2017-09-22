@@ -240,10 +240,6 @@ task versionOnly {
   }
 }
 
-tasks.withType(Test) { task ->
-  task.testLogging.exceptionFormat = 'full'
-}
-
 if (project.hasProperty('release')) {
 
   apply plugin: 'signing'
