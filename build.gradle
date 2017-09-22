@@ -165,6 +165,12 @@ bundle {
   ]
 }
 
+install {
+  repositories.mavenInstaller {
+    pom.version = "${project.version}-${versioning.info.build}"
+  }
+}
+
 forbiddenApis {
   // https://github.com/policeman-tools/forbidden-apis/wiki/BundledSignatures
   bundledSignatures = [
