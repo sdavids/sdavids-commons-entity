@@ -29,8 +29,8 @@ buildscript {
   ext {
     forbiddenapisVersion = '2.3'
   }
+
   repositories {
-    mavenLocal()
     jcenter()
   }
 
