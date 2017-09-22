@@ -206,6 +206,16 @@ spotless {
   }
 }
 
+test {
+  systemProperty 'user.timezone', System.properties['user.timezone']
+
+  maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+
+  testLogging {
+    exceptionFormat = 'full'
+  }
+}
+
 idea {
   module {
     downloadJavadoc = true
