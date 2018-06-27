@@ -44,7 +44,7 @@ plugins {
   id 'org.dm.bundle' version '0.10.0'
   id 'de.fuerstenau.buildconfig' version '1.1.8'
   id 'net.nemerosa.versioning' version '2.6.1'
-  id 'com.diffplug.gradle.spotless' version '3.5.2'
+  id 'com.diffplug.gradle.spotless' version '3.13.0'
   id 'net.ltgt.errorprone' version '0.0.11'
   id 'com.github.ben-manes.versions' version '0.15.0'
   id 'com.jfrog.bintray' version '1.7.3'
@@ -198,7 +198,7 @@ spotless {
   }
   java {
     googleJavaFormat('1.6')
-    licenseHeaderFile "${rootProject.projectDir}/gradle/spotless-license-java.txt"
+    licenseHeaderFile "${project.projectDir}/gradle/spotless-license-java.txt"
   }
 }
 
