@@ -201,15 +201,6 @@ wrapper {
   distributionType = 'ALL'
 }
 
-task versionOnly {
-  group = 'Versioning'
-  description = 'Writes the project version on the standard output.'
-
-  doLast {
-    println version
-  }
-}
-
 if (project.hasProperty('release')) {
 
   apply plugin: 'signing'
