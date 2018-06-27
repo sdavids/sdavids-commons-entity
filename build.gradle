@@ -26,7 +26,7 @@ import java.nio.file.Path
 
 buildscript {
   ext {
-    forbiddenapisVersion = '2.3'
+    forbiddenapisVersion = '2.5'
   }
 
   repositories {
@@ -169,6 +169,7 @@ bundle {
 forbiddenApis {
   // https://github.com/policeman-tools/forbidden-apis/wiki/BundledSignatures
   bundledSignatures = [
+      'jdk-internal',
       'jdk-unsafe',
       'jdk-deprecated',
       'jdk-non-portable',
