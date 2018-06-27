@@ -41,7 +41,7 @@ buildscript {
 
 // https://plugins.gradle.org/
 plugins {
-  id 'net.nemerosa.versioning' version '2.6.1'
+  id 'net.nemerosa.versioning' version '2.7.1'
   id 'com.diffplug.gradle.spotless' version '3.13.0'
   id 'net.ltgt.errorprone' version '0.0.14'
   id 'com.jfrog.bintray' version '1.7.3'
