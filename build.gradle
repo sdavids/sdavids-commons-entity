@@ -55,7 +55,7 @@ ext {
   jsr305Version = '3.0.2'
   junitVersion = '4.12'
   mockitoVersion = '2.19.0'
-  assertjVersion = '3.8.0'
+  assertjVersion = '3.10.0'
 
   now = OffsetDateTime.now(UTC)
   nowIsoDateTime = now.format(ISO_DATE_TIME)
