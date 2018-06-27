@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Sebastian Davids
+ * Copyright (c) 2017-2018, Sebastian Davids
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 package io.sdavids.commons.entity;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * A marker interface for an object having a {@code String} ID.
@@ -30,7 +32,7 @@ public interface HasStringId {
    * @return the ID; may be null
    * @since 1.0
    */
-  static String stringIdFrom(HasStringId obj) {
+  static @Nullable String stringIdFrom(@Nullable HasStringId obj) {
     return obj == null ? null : obj.getId();
   }
 
@@ -42,7 +44,7 @@ public interface HasStringId {
    * @see java.util.function.Predicate
    * @since 1.0
    */
-  static boolean nonNullStringId(HasStringId obj) {
+  static boolean nonNullStringId(@Nullable HasStringId obj) {
     return !(obj == null || obj.getId() == null);
   }
 
@@ -54,7 +56,7 @@ public interface HasStringId {
    * @return the passed {@code HasStringId}, or null if it was null or its ID was null
    * @since 1.0
    */
-  static HasStringId nullIfStringIdNull(HasStringId obj) {
+  static @Nullable HasStringId nullIfStringIdNull(@Nullable HasStringId obj) {
     return obj == null ? null : obj.getId() == null ? null : obj;
   }
 
@@ -64,6 +66,7 @@ public interface HasStringId {
    * @return the ID; may be null
    * @since 1.0
    */
+  @Nullable
   String getId();
 
   /**

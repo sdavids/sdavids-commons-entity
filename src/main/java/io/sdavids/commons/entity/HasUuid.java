@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Sebastian Davids
+ * Copyright (c) 2017-2018, Sebastian Davids
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package io.sdavids.commons.entity;
 
 import java.util.UUID;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * A marker interface for an object having a {@code UUID}.
@@ -33,7 +34,7 @@ public interface HasUuid {
    * @return the {@code UUID}; may be null
    * @since 1.0
    */
-  static UUID uuidFrom(HasUuid obj) {
+  static @Nullable UUID uuidFrom(@Nullable HasUuid obj) {
     return obj == null ? null : obj.getUuid();
   }
 
@@ -45,7 +46,7 @@ public interface HasUuid {
    * @see java.util.function.Predicate
    * @since 1.0
    */
-  static boolean nonNullUuid(HasUuid obj) {
+  static boolean nonNullUuid(@Nullable HasUuid obj) {
     return !(obj == null || obj.getUuid() == null);
   }
 
@@ -55,6 +56,7 @@ public interface HasUuid {
    * @return the {@code UUID}; may be null
    * @since 1.0
    */
+  @Nullable
   UUID getUuid();
 
   /**

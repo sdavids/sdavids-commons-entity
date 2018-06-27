@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Sebastian Davids
+ * Copyright (c) 2017-2018, Sebastian Davids
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 package io.sdavids.commons.entity;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * A marker interface for an object having an {@code Integer} ID.
@@ -30,7 +32,7 @@ public interface HasIntegerId {
    * @return the ID; may be {@code null}
    * @since 1.1
    */
-  static Integer integerIdFrom(HasIntegerId obj) {
+  static @Nullable Integer integerIdFrom(@Nullable HasIntegerId obj) {
     return obj == null ? null : obj.getId();
   }
 
@@ -42,7 +44,7 @@ public interface HasIntegerId {
    * @see java.util.function.Predicate
    * @since 1.1
    */
-  static boolean nonNullIntegerId(HasIntegerId obj) {
+  static boolean nonNullIntegerId(@Nullable HasIntegerId obj) {
     return !(obj == null || obj.getId() == null);
   }
 
@@ -54,7 +56,7 @@ public interface HasIntegerId {
    * @return the passed {@code HasIntegerId}, or null if it was null or its ID was null
    * @since 1.1
    */
-  static HasIntegerId nullIfIntegerIdNull(HasIntegerId obj) {
+  static @Nullable HasIntegerId nullIfIntegerIdNull(@Nullable HasIntegerId obj) {
     return obj == null ? null : obj.getId() == null ? null : obj;
   }
 
@@ -64,6 +66,7 @@ public interface HasIntegerId {
    * @return the ID; may be null
    * @since 1.1
    */
+  @Nullable
   Integer getId();
 
   /**

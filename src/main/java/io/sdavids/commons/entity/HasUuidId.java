@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Sebastian Davids
+ * Copyright (c) 2017-2018, Sebastian Davids
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package io.sdavids.commons.entity;
 
 import java.util.UUID;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * A marker interface for an object having a {@code UUID} ID.
@@ -33,7 +34,7 @@ public interface HasUuidId {
    * @return the ID; may be null
    * @since 1.0
    */
-  static UUID uuidIdFrom(HasUuidId obj) {
+  static @Nullable UUID uuidIdFrom(@Nullable HasUuidId obj) {
     return obj == null ? null : obj.getId();
   }
 
@@ -45,7 +46,7 @@ public interface HasUuidId {
    * @see java.util.function.Predicate
    * @since 1.0
    */
-  static boolean nonNullUuidId(HasUuidId obj) {
+  static boolean nonNullUuidId(@Nullable HasUuidId obj) {
     return !(obj == null || obj.getId() == null);
   }
 
@@ -57,7 +58,7 @@ public interface HasUuidId {
    * @return the passed {@code HasUuidId}, or null if it was null or its ID was null
    * @since 1.0
    */
-  static HasUuidId nullIfUuidIdNull(HasUuidId obj) {
+  static @Nullable HasUuidId nullIfUuidIdNull(@Nullable HasUuidId obj) {
     return obj == null ? null : obj.getId() == null ? null : obj;
   }
 
@@ -67,6 +68,7 @@ public interface HasUuidId {
    * @return the ID; may be null
    * @since 1.0
    */
+  @Nullable
   UUID getId();
 
   /**
