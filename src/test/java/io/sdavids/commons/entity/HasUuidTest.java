@@ -23,17 +23,14 @@ import static org.mockito.Mockito.when;
 import static org.mockito.quality.Strictness.STRICT_STUBS;
 
 import java.util.UUID;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
+import org.mockito.junit.jupiter.MockitoSettings;
 
+@MockitoSettings(strictness = STRICT_STUBS)
 public final class HasUuidTest {
 
   private static final UUID UUID = fromString("1833e288-f477-48f2-81da-3ce6fde82252");
-
-  @Rule public MockitoRule rule = MockitoJUnit.rule().strictness(STRICT_STUBS);
 
   @Mock private HasUuid hasUuid;
 

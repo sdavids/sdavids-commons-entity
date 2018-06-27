@@ -49,7 +49,7 @@ ext {
   // https://bintray.com/bintray/jcenter
   errorproneVersion = '2.3.1'
   checkerframeworkVersion = '2.5.2'
-  junitVersion = '4.12'
+  junitVersion = '5.2.0'
   mockitoVersion = '2.19.0'
   assertjVersion = '3.10.0'
 
@@ -83,8 +83,10 @@ dependencies {
 
   api("org.checkerframework:checker-qual:${checkerframeworkVersion}")
 
-  testImplementation("junit:junit:${junitVersion}")
+  testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+  testImplementation("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
   testImplementation("org.mockito:mockito-core:${mockitoVersion}")
+  testImplementation("org.mockito:mockito-junit-jupiter:${mockitoVersion}")
   testImplementation("org.assertj:assertj-core:${assertjVersion}")
 }
 
@@ -176,6 +178,8 @@ spotless {
 }
 
 test {
+  useJUnitPlatform()
+
   systemProperty 'user.timezone', System.properties['user.timezone']
 
   maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1

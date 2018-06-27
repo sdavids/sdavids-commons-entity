@@ -22,17 +22,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.mockito.quality.Strictness.STRICT_STUBS;
 
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
+import org.mockito.junit.jupiter.MockitoSettings;
 
+@MockitoSettings(strictness = STRICT_STUBS)
 public final class HasStringIdTest {
 
   private static final String ID = "test1";
-
-  @Rule public MockitoRule rule = MockitoJUnit.rule().strictness(STRICT_STUBS);
 
   @Mock private HasStringId hasStringId;
 
