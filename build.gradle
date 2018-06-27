@@ -17,12 +17,12 @@
 import static java.io.File.createTempFile
 import static java.nio.file.StandardCopyOption.COPY_ATTRIBUTES
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING
-import static java.time.OffsetDateTime.now
 import static java.time.ZoneOffset.UTC
 import static java.time.format.DateTimeFormatter.ISO_DATE_TIME
 
 import java.nio.file.Files
 import java.nio.file.Path
+import java.time.OffsetDateTime
 
 buildscript {
   ext {
@@ -59,7 +59,7 @@ ext {
   mockitoVersion = '2.10.0'
   assertjVersion = '3.8.0'
 
-  now = now(UTC)
+  now = OffsetDateTime.now(UTC)
   nowIsoDateTime = now.format(ISO_DATE_TIME)
   buildJdk = "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})"
   vendor = 'Sebastian Davids'
