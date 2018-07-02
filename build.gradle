@@ -74,9 +74,7 @@ repositories {
 }
 
 apply plugin: 'java-library'
-apply plugin: 'net.ltgt.errorprone'
 apply plugin: 'de.thetaphi.forbiddenapis'
-apply plugin: 'com.diffplug.gradle.spotless'
 apply plugin: 'maven'
 apply plugin: 'idea'
 
