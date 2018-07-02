@@ -20,27 +20,26 @@ import static io.sdavids.commons.entity.HasUuid.uuidFrom;
 import static java.util.UUID.fromString;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
-import static org.mockito.quality.Strictness.STRICT_STUBS;
 
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 
-@MockitoSettings(strictness = STRICT_STUBS)
-public final class HasUuidTest {
+@MockitoSettings
+final class HasUuidTest {
 
   private static final UUID UUID = fromString("1833e288-f477-48f2-81da-3ce6fde82252");
 
   @Mock private HasUuid hasUuid;
 
   @Test
-  public void uuidFrom_null() {
+  void uuidFrom_null() {
     assertThat(uuidFrom(null)).isNull();
   }
 
   @Test
-  public void hasUuid_withId_null() {
+  void hasUuid_withId_null() {
     when(hasUuid.getUuid()).thenReturn(null);
     when(hasUuid.hasUuid()).thenCallRealMethod();
 
@@ -48,7 +47,7 @@ public final class HasUuidTest {
   }
 
   @Test
-  public void hasUuid_withId() {
+  void hasUuid_withId() {
     when(hasUuid.getUuid()).thenReturn(UUID);
     when(hasUuid.hasUuid()).thenCallRealMethod();
 
@@ -56,33 +55,33 @@ public final class HasUuidTest {
   }
 
   @Test
-  public void nonNullUuid_null() {
+  void nonNullUuid_null() {
     assertThat(nonNullUuid(null)).isFalse();
   }
 
   @Test
-  public void nonNullUuid_withId_null() {
+  void nonNullUuid_withId_null() {
     when(hasUuid.getUuid()).thenReturn(null);
 
     assertThat(nonNullUuid(hasUuid)).isFalse();
   }
 
   @Test
-  public void nonNullUuid_withId() {
+  void nonNullUuid_withId() {
     when(hasUuid.getUuid()).thenReturn(UUID);
 
     assertThat(nonNullUuid(hasUuid)).isTrue();
   }
 
   @Test
-  public void uuidFrom_hasUuid_returns_null() {
+  void uuidFrom_hasUuid_returns_null() {
     when(hasUuid.getUuid()).thenReturn(null);
 
     assertThat(uuidFrom(hasUuid)).isNull();
   }
 
   @Test
-  public void uuidFrom_() {
+  void uuidFrom_() {
     when(hasUuid.getUuid()).thenReturn(UUID);
 
     assertThat(uuidFrom(hasUuid)).isEqualTo(UUID);

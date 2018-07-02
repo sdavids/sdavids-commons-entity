@@ -20,21 +20,20 @@ import static io.sdavids.commons.entity.HasStringId.nullIfStringIdNull;
 import static io.sdavids.commons.entity.HasStringId.stringIdFrom;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
-import static org.mockito.quality.Strictness.STRICT_STUBS;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 
-@MockitoSettings(strictness = STRICT_STUBS)
-public final class HasStringIdTest {
+@MockitoSettings
+final class HasStringIdTest {
 
   private static final String ID = "test1";
 
   @Mock private HasStringId hasStringId;
 
   @Test
-  public void hasId_withId_null() {
+  void hasId_withId_null() {
     when(hasStringId.getId()).thenReturn(null);
     when(hasStringId.hasId()).thenCallRealMethod();
 
@@ -42,7 +41,7 @@ public final class HasStringIdTest {
   }
 
   @Test
-  public void hasId_withId() {
+  void hasId_withId() {
     when(hasStringId.getId()).thenReturn("test2");
     when(hasStringId.hasId()).thenCallRealMethod();
 
@@ -50,57 +49,57 @@ public final class HasStringIdTest {
   }
 
   @Test
-  public void nonNullStringId_null() {
+  void nonNullStringId_null() {
     assertThat(nonNullStringId(null)).isFalse();
   }
 
   @Test
-  public void nonNullStringId_withId_null() {
+  void nonNullStringId_withId_null() {
     when(hasStringId.getId()).thenReturn(null);
 
     assertThat(nonNullStringId(hasStringId)).isFalse();
   }
 
   @Test
-  public void nonNullStringId_withId() {
+  void nonNullStringId_withId() {
     when(hasStringId.getId()).thenReturn("test3");
 
     assertThat(nonNullStringId(hasStringId)).isTrue();
   }
 
   @Test
-  public void stringIdFrom_null() {
+  void stringIdFrom_null() {
     assertThat(stringIdFrom(null)).isNull();
   }
 
   @Test
-  public void stringIdFrom_hasStringId_returns_null() {
+  void stringIdFrom_hasStringId_returns_null() {
     when(hasStringId.getId()).thenReturn(null);
 
     assertThat(stringIdFrom(hasStringId)).isNull();
   }
 
   @Test
-  public void stringIdFrom_() {
+  void stringIdFrom_() {
     when(hasStringId.getId()).thenReturn(ID);
 
     assertThat(stringIdFrom(hasStringId)).isEqualTo(ID);
   }
 
   @Test
-  public void nullIfStringIdNull_null() {
+  void nullIfStringIdNull_null() {
     assertThat(nullIfStringIdNull(null)).isNull();
   }
 
   @Test
-  public void nullIfStringIdNull_hasStringId_returns_null() {
+  void nullIfStringIdNull_hasStringId_returns_null() {
     when(hasStringId.getId()).thenReturn(null);
 
     assertThat(nullIfStringIdNull(hasStringId)).isNull();
   }
 
   @Test
-  public void nullIfStringIdNull_() {
+  void nullIfStringIdNull_() {
     when(hasStringId.getId()).thenReturn(ID);
 
     assertThat(nullIfStringIdNull(hasStringId)).isEqualTo(hasStringId);
