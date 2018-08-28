@@ -38,10 +38,10 @@ buildscript {
 // https://plugins.gradle.org/
 plugins {
   id 'net.nemerosa.versioning' version '2.7.1'
-  id 'com.jfrog.bintray' version '1.8.3'
   id 'com.diffplug.gradle.spotless' version '3.14.0'
   id 'net.ltgt.errorprone' version '0.0.16'
   id 'ru.vyarus.animalsniffer' version '1.4.6'
+  id 'com.jfrog.bintray' version '1.8.4'
 }
 
 ext {
