@@ -155,19 +155,29 @@ forbiddenApis {
 
 spotless {
   format 'misc', {
-    target '.gitattributes', '.gitignore', '**/*.gradle', '**/*.adoc', '**/*.txt',
+    target '.gitattributes', '.gitignore',
+        'build.gradle', 'settings.gradle',
+        'README.adoc',
+        'release.sh',
+        'CODING_STYLE.txt',
         'AUTHORS', 'CONTRIBUTORS', 'LICENSE', 'NOTICE'
     trimTrailingWhitespace()
     endWithNewline()
   }
   format 'properties', {
-    target '**/*.properties'
+    target 'gradle.properties'
     encoding 'ISO-8859-1'
     trimTrailingWhitespace()
     endWithNewline()
   }
   format 'yaml', {
-    target '**/*.yaml', '**/*.yml'
+    target '.travis.yml'
+    indentWithSpaces(2)
+    trimTrailingWhitespace()
+    endWithNewline()
+  }
+  format 'xml', {
+    target 'gradle/conf/**/*.xml'
     indentWithSpaces(2)
     trimTrailingWhitespace()
     endWithNewline()
