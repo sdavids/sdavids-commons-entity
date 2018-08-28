@@ -52,8 +52,8 @@ ext {
   java8SignatureVersion = '1.0'
   checkerframeworkVersion = '2.5.4'
   junitVersion = '5.2.0'
-  mockitoVersion = '2.19.0'
   assertjVersion = '3.10.0'
+  mockitoVersion = '2.21.0'
 
   nowIsoDateTime = OffsetDateTime.now(UTC).format(ISO_DATE_TIME)
   buildJdk = "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})"
