@@ -174,7 +174,7 @@ spotless {
   }
   java {
     googleJavaFormat('1.6')
-    licenseHeaderFile "${project.projectDir}/gradle/spotless-license-java.txt"
+    licenseHeaderFile "${project.projectDir}/gradle/conf/spotless-license-java.txt"
   }
 }
 
