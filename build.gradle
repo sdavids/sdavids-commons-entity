@@ -74,7 +74,6 @@ repositories {
 apply plugin: 'java-library'
 apply plugin: 'de.thetaphi.forbiddenapis'
 apply plugin: 'maven'
-apply plugin: 'idea'
 
 dependencies {
   signature("org.codehaus.mojo.signature:java18:${java8SignatureVersion}@signature")
@@ -195,13 +194,6 @@ test {
 
   testLogging {
     exceptionFormat = 'full'
-  }
-}
-
-idea {
-  module {
-    downloadJavadoc = true
-    downloadSources = true
   }
 }
 
