@@ -38,6 +38,10 @@ buildscript {
 
 // https://plugins.gradle.org/
 plugins {
+  id 'java-library'
+  id 'checkstyle'
+  id 'pmd'
+  id 'jacoco'
   id 'net.nemerosa.versioning' version '2.7.1'
   id 'com.diffplug.gradle.spotless' version '3.14.0'
   id 'net.ltgt.errorprone' version '0.0.16'
@@ -45,6 +49,7 @@ plugins {
   id 'ru.vyarus.animalsniffer' version '1.4.6'
   id 'org.owasp.dependencycheck' version '3.3.1'
   id 'com.jfrog.bintray' version '1.8.4'
+  id 'maven'
 }
 
 ext {
@@ -72,19 +77,14 @@ ext {
   ] as String[]
 }
 
+apply plugin: 'de.thetaphi.forbiddenapis'
+
 group 'io.sdavids.commons'
 version = '1.2.0'
 
 repositories {
   jcenter()
 }
-
-apply plugin: 'java-library'
-apply plugin: 'de.thetaphi.forbiddenapis'
-apply plugin: 'checkstyle'
-apply plugin: 'pmd'
-apply plugin: 'jacoco'
-apply plugin: 'maven'
 
 dependencies {
   signature("org.codehaus.mojo.signature:java18:${java8SignatureVersion}@signature")
