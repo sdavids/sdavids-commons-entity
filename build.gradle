@@ -57,6 +57,7 @@ ext {
   spotbugsVersion = '3.1.7'
   findsecbugsVersion = '1.8.0'
   java8SignatureVersion = '1.0'
+  jacocoVersion = '0.8.2'
   checkerframeworkVersion = '2.5.4'
   junitVersion = '5.2.0'
   mockitoVersion = '2.21.0'
@@ -82,6 +83,7 @@ apply plugin: 'java-library'
 apply plugin: 'de.thetaphi.forbiddenapis'
 apply plugin: 'checkstyle'
 apply plugin: 'pmd'
+apply plugin: 'jacoco'
 apply plugin: 'maven'
 
 dependencies {
@@ -190,6 +192,17 @@ dependencyCheck {
   failBuildOnCVSS = 5
   scanConfigurations = ['compileClasspath', 'runtimeClasspath']
   suppressionFile = project.file('gradle/conf/dependency-check-suppressions.xml')
+}
+
+jacoco {
+  toolVersion = "${jacocoVersion}"
+}
+
+jacocoTestReport {
+  reports {
+    xml.enabled false
+    html.enabled true
+  }
 }
 
 spotless {
