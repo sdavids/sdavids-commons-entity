@@ -58,8 +58,8 @@ ext {
   findsecbugsVersion = '1.8.0'
   java8SignatureVersion = '1.0'
   jacocoVersion = '0.8.2'
-  checkerframeworkVersion = '2.5.4'
   junitVersion = '5.2.0'
+  checkerframeworkVersion = '2.5.5'
   mockitoVersion = '2.21.0'
   assertjVersion = '3.11.1'
 
