@@ -196,7 +196,6 @@ jacocoTestReport {
 spotless {
   format 'misc', {
     target '.gitattributes', '.gitignore',
-        'build.gradle', 'settings.gradle',
         'README.adoc',
         'release.sh',
         'CODING_STYLE.txt',
@@ -225,6 +224,9 @@ spotless {
   java {
     googleJavaFormat('1.6')
     licenseHeaderFile "${project.projectDir}/gradle/conf/spotless-license-java.txt"
+  }
+  groovyGradle {
+    target 'build.gradle', 'settings.gradle'
   }
 }
 
