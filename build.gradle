@@ -161,11 +161,19 @@ tasks.withType(Checkstyle).configureEach {
   configFile = project.file('gradle/conf/checkstyle.xml')
   configDir = project.provider({ project.file('gradle/conf/') })
   maxWarnings = 0
+  reports {
+    xml.enabled false
+    html.enabled project.hasProperty('createReports')
+  }
 }
 
 tasks.withType(Pmd).configureEach {
   ruleSets = []
   ruleSetFiles = project.files('gradle/conf/pmd.xml')
+  reports {
+    xml.enabled false
+    html.enabled project.hasProperty('createReports')
+  }
 }
 
 spotbugs {
@@ -177,7 +185,7 @@ tasks.withType(SpotBugsTask).configureEach {
   effort = 'max'
   reports {
     xml.enabled false
-    html.enabled true
+    html.enabled project.hasProperty('createReports')
   }
 }
 
@@ -194,7 +202,7 @@ jacoco {
 jacocoTestReport {
   reports {
     xml.enabled false
-    html.enabled true
+    html.enabled project.hasProperty('createReports')
   }
 }
 
@@ -243,6 +251,9 @@ tasks.withType(Test).configureEach {
   systemProperty 'user.country', System.properties['user.country']
 
   maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+
+  reports.junitXml.enabled = false
+  reports.html.enabled = project.hasProperty('createReports')
 
   testLogging {
     exceptionFormat = 'full'
