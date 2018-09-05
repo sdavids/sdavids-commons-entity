@@ -25,10 +25,9 @@ language: java
 sudo: false
 dist: trusty
 
-matrix:
-  include:
-    - os: linux
-      jdk: openjdk8
+jdk:
+  - openjdk8
+  - openjdk10
 
 # https://docs.travis-ci.com/user/languages/java/#Caching
 before_cache:
