@@ -104,7 +104,8 @@ dependencies {
   testImplementation("org.assertj:assertj-core:${assertjVersion}")
 }
 
-sourceCompatibility = '1.8'
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 compileJava.options.debugOptions.debugLevel = 'source,lines,vars'
 
