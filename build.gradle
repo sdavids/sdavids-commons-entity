@@ -36,7 +36,6 @@ plugins {
   id 'de.thetaphi.forbiddenapis' version '2.6'
   id 'com.github.spotbugs' version '1.6.3'
   id 'ru.vyarus.animalsniffer' version '1.4.6'
-  id 'org.owasp.dependencycheck' version '3.3.1'
   id 'com.jfrog.bintray' version '1.8.4'
   id 'maven'
 }
@@ -175,12 +174,6 @@ tasks.withType(SpotBugsTask).configureEach {
     xml.enabled false
     html.enabled project.hasProperty('createReports')
   }
-}
-
-dependencyCheck {
-  failBuildOnCVSS = 5
-  scanConfigurations = ['compileClasspath', 'runtimeClasspath']
-  suppressionFile = project.file('gradle/conf/dependency-check-suppressions.xml')
 }
 
 jacoco {
