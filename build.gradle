@@ -53,7 +53,7 @@ ext {
   java8SignatureVersion = '1.0'
   jacocoVersion = '0.8.2'
   checkerframeworkVersion = '2.5.5'
-  junitVersion = '5.3.0'
+  junitVersion = '5.3.1'
   mockitoVersion = '2.22.0'
   assertjVersion = '3.11.1'
 
