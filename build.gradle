@@ -15,12 +15,9 @@
  */
 
 import static java.io.File.createTempFile
-import static java.time.ZoneOffset.UTC
-import static java.time.format.DateTimeFormatter.ISO_DATE_TIME
 
 import com.github.spotbugs.SpotBugsTask
 import de.thetaphi.forbiddenapis.gradle.CheckForbiddenApis
-import java.time.OffsetDateTime
 import net.ltgt.gradle.errorprone.CheckSeverity
 
 // https://plugins.gradle.org/
@@ -57,8 +54,6 @@ ext {
   mockitoVersion = '2.22.0'
   assertjVersion = '3.11.1'
 
-  nowIsoDateTime = OffsetDateTime.now(UTC).format(ISO_DATE_TIME)
-  buildJdk = "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})"
   vendor = 'Sebastian Davids'
 
   javadocLinks = [
@@ -110,23 +105,19 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 tasks.named('jar').configure {
+  preserveFileTimestamps = false
+  reproducibleFileOrder = true
+  dirMode = 0775
+  fileMode = 0664
   manifest {
     attributes(
-        'Created-By': "Gradle ${gradle.gradleVersion}",
-        'Built-By': project.author,
-        'Build-Jdk': project.buildJdk,
-        'Build-Time': project.nowIsoDateTime,
         'Build-Revision': versioning.info.commit,
-        'Build-Host': "${InetAddress.localHost.hostName}",
         'Specification-Title': project.name,
         'Specification-Version': project.version,
         'Specification-Vendor': project.vendor,
         'Implementation-Title': project.name,
         'Implementation-Version': "${project.version}-${versioning.info.build}",
         'Implementation-Vendor': project.vendor,
-        ("Version-${project.name}".toString().capitalize()): project.version,
-        ("Time-${project.name}".toString().capitalize()): project.nowIsoDateTime,
-        ("Revision-${project.name}".toString().capitalize()): versioning.info.commit,
         'Automatic-Module-Name': project.rootPackageName
     )
   }
