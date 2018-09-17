@@ -54,7 +54,7 @@ ext {
   jacocoVersion = '0.8.2'
   checkerframeworkVersion = '2.5.5'
   junitVersion = '5.3.0'
-  mockitoVersion = '2.21.0'
+  mockitoVersion = '2.22.0'
   assertjVersion = '3.11.1'
 
   nowIsoDateTime = OffsetDateTime.now(UTC).format(ISO_DATE_TIME)
