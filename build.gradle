@@ -19,6 +19,7 @@ import static java.time.ZoneOffset.UTC
 import static java.time.format.DateTimeFormatter.ISO_DATE_TIME
 
 import com.github.spotbugs.SpotBugsTask
+import de.thetaphi.forbiddenapis.gradle.CheckForbiddenApis
 import java.time.OffsetDateTime
 
 buildscript {
@@ -107,32 +108,16 @@ dependencies {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-compileJava.options.debugOptions.debugLevel = 'source,lines,vars'
-
-[compileJava, compileTestJava]*.options.collect { options ->
+tasks.withType(JavaCompile).configureEach {
+  options.fork = true
   options.encoding = 'UTF-8'
-}
-
-[compileJava, compileTestJava]*.options.collect { options ->
-  options.debug = true
+  options.debugOptions.debugLevel = 'source,lines,vars'
   options.deprecation = true
-  options.warnings = true
+  // https://docs.oracle.com/javase/10/tools/javac.htm#GUID-AEEC9F07-CB49-4E96-8BC7-BCC2C7F725C9__ENABLEORDISABLEWARNINGSWITHTHE-XLIN-7D3DB0EE
+  options.compilerArgs += ['-parameters', '-Xlint:all,-processing,-path', '-Werror']
 }
 
-// http://docs.oracle.com/javase/8/docs/technotes/tools/windows/javac.html#BHCJCABJ
-compileJava.options.collect { options ->
-  options.compilerArgs << '-parameters'
-  options.compilerArgs << '-Xlint:all,-processing,-path'
-  options.compilerArgs << '-Werror'
-}
-
-// http://docs.oracle.com/javase/8/docs/technotes/tools/windows/javac.html#BHCJCABJ
-compileTestJava.options.collect { options ->
-  options.compilerArgs << '-parameters'
-  options.compilerArgs << '-Xlint:all,-processing,-path'
-}
-
-jar {
+tasks.named('jar').configure {
   manifest {
     attributes(
         'Created-By': "Gradle ${gradle.gradleVersion}",
@@ -155,7 +140,7 @@ jar {
   }
 }
 
-forbiddenApis {
+tasks.withType(CheckForbiddenApis).configureEach {
   // https://github.com/policeman-tools/forbidden-apis/wiki/BundledSignatures
   bundledSignatures = [
       'jdk-internal',
@@ -167,22 +152,24 @@ forbiddenApis {
   ]
 }
 
-checkstyle {
-  configDir = project.file('gradle/conf/')
+tasks.withType(Checkstyle).configureEach {
+  configFile = project.file('gradle/conf/checkstyle.xml')
+  configDir = project.provider({ project.file('gradle/conf/') })
+  maxWarnings = 0
 }
 
-pmd {
+tasks.withType(Pmd).configureEach {
   ruleSets = []
   ruleSetFiles = project.files('gradle/conf/pmd.xml')
 }
 
 spotbugs {
   toolVersion = "${spotbugsVersion}"
-  effort = 'max'
   excludeFilter = project.file('gradle/conf/spotbugs-exclude-filter.xml')
 }
 
-tasks.withType(SpotBugsTask) {
+tasks.withType(SpotBugsTask).configureEach {
+  effort = 'max'
   reports {
     xml.enabled false
     html.enabled true
@@ -241,7 +228,7 @@ spotless {
   }
 }
 
-test {
+tasks.withType(Test).configureEach {
   useJUnitPlatform()
 
   systemProperty 'user.timezone', System.properties['user.timezone']
