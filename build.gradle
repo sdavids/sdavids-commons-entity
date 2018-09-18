@@ -184,6 +184,10 @@ jacocoTestReport {
   }
 }
 
+if (project.hasProperty('createReports')) {
+  check.dependsOn jacocoTestReport
+}
+
 spotless {
   format 'misc', {
     target '.gitattributes', '.gitignore',
