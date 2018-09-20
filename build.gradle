@@ -54,6 +54,7 @@ ext {
   checkstyleVersion = '8.12'
   pmdVersion = '6.6.0'
   spotbugsVersion = '3.1.7'
+  findsecbugsVersion = '1.8.0'
   java8SignatureVersion = '1.0'
   checkerframeworkVersion = '2.5.4'
   junitVersion = '5.2.0'
@@ -88,6 +89,8 @@ dependencies {
   checkstyle("com.puppycrawl.tools:checkstyle:${checkstyleVersion}")
   pmd("net.sourceforge.pmd:pmd-core:${pmdVersion}")
   pmd("net.sourceforge.pmd:pmd-java:${pmdVersion}")
+
+  spotbugsPlugins("com.h3xstream.findsecbugs:findsecbugs-plugin:${findsecbugsVersion}")
 
   api("org.checkerframework:checker-qual:${checkerframeworkVersion}")
 
