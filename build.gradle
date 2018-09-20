@@ -233,6 +233,7 @@ tasks.withType(Test).configureEach {
   systemProperty 'user.timezone', System.properties['user.timezone']
   systemProperty 'user.language', System.properties['user.language']
   systemProperty 'user.country', System.properties['user.country']
+  systemProperty 'java.awt.headless', 'true'
 
   maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
 
