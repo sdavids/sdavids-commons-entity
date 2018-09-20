@@ -21,6 +21,7 @@ import static java.time.format.DateTimeFormatter.ISO_DATE_TIME
 import com.github.spotbugs.SpotBugsTask
 import de.thetaphi.forbiddenapis.gradle.CheckForbiddenApis
 import java.time.OffsetDateTime
+import net.ltgt.gradle.errorprone.CheckSeverity
 
 buildscript {
   ext {
@@ -119,6 +120,9 @@ tasks.withType(JavaCompile).configureEach {
   options.compilerArgs += ['-parameters', '-Xlint:all,-processing,-path', '-Werror']
   options.errorprone {
     disableWarningsInGeneratedCode = true
+    allDisabledChecksAsWarnings = true
+    check('StaticOrDefaultInterfaceMethod', CheckSeverity.OFF)
+    check('ReturnMissingNullable', CheckSeverity.OFF)
   }
 }
 
