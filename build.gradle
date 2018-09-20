@@ -216,8 +216,7 @@ test {
 }
 
 wrapper {
-  gradleVersion = '4.8.1'
-  distributionType = 'ALL'
+  gradleVersion = '4.10.2'
 }
 
 if (project.hasProperty('release')) {
