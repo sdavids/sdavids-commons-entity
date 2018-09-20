@@ -31,7 +31,6 @@
 
   <rule ref="category/java/codestyle.xml/AvoidDollarSigns"/>
   <rule ref="category/java/codestyle.xml/AvoidFinalLocalVariable"/>
-  <rule ref="category/java/codestyle.xml/AvoidPrefixingMethodParameters"/>
   <rule ref="category/java/codestyle.xml/AvoidProtectedFieldInFinalClass"/>
   <rule ref="category/java/codestyle.xml/AvoidProtectedMethodInFinalClassNotExtending"/>
   <rule ref="category/java/codestyle.xml/AvoidUsingNativeCode"/>
@@ -40,7 +39,6 @@
   <rule ref="category/java/codestyle.xml/ExtendsObject"/>
   <rule ref="category/java/codestyle.xml/ForLoopShouldBeWhileLoop"/>
   <rule ref="category/java/codestyle.xml/IdenticalCatchBranches"/>
-  <rule ref="category/java/codestyle.xml/MIsLeadingVariableName"/>
   <rule ref="category/java/codestyle.xml/NoPackage"/>
   <rule ref="category/java/codestyle.xml/PackageCase"/>
   <rule ref="category/java/codestyle.xml/PrematureDeclaration"/>
