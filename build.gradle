@@ -18,6 +18,7 @@ import static java.io.File.createTempFile
 import static java.time.ZoneOffset.UTC
 import static java.time.format.DateTimeFormatter.ISO_DATE_TIME
 
+import com.github.spotbugs.SpotBugsTask
 import java.time.OffsetDateTime
 
 buildscript {
@@ -40,6 +41,7 @@ plugins {
   id 'net.nemerosa.versioning' version '2.7.1'
   id 'com.diffplug.gradle.spotless' version '3.14.0'
   id 'net.ltgt.errorprone' version '0.0.16'
+  id 'com.github.spotbugs' version '1.6.3'
   id 'ru.vyarus.animalsniffer' version '1.4.6'
   id 'com.jfrog.bintray' version '1.8.4'
 }
@@ -51,6 +53,7 @@ ext {
   errorproneVersion = '2.3.1'
   checkstyleVersion = '8.12'
   pmdVersion = '6.6.0'
+  spotbugsVersion = '3.1.7'
   java8SignatureVersion = '1.0'
   checkerframeworkVersion = '2.5.4'
   junitVersion = '5.2.0'
@@ -164,6 +167,19 @@ checkstyle {
 pmd {
   ruleSets = []
   ruleSetFiles = project.files('gradle/conf/pmd.xml')
+}
+
+spotbugs {
+  toolVersion = "${spotbugsVersion}"
+  effort = 'max'
+  excludeFilter = project.file('gradle/conf/spotbugs-exclude-filter.xml')
+}
+
+tasks.withType(SpotBugsTask) {
+  reports {
+    xml.enabled false
+    html.enabled true
+  }
 }
 
 spotless {
