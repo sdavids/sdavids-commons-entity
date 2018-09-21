@@ -4,6 +4,8 @@ Sebastian Davids
 image::https://travis-ci.org/sdavids/sdavids-commons-entity.svg?branch=master[Build Status]
 image::https://api.bintray.com/packages/sdavids/sdavids/sdavids-commons-entity/images/download.svg[link="https://bintray.com/sdavids/sdavids/sdavids-commons-entity/_latestVersion"]
 
+Utility methods and classes for working with entities.
+
 == Building from Source
 
 This module can be build via:
