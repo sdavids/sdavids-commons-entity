@@ -15,3 +15,6 @@
  */
 
 rootProject.name = 'sdavids-commons-entity'
+
+enableFeaturePreview('IMPROVED_POM_SUPPORT')
+enableFeaturePreview('STABLE_PUBLISHING')
