@@ -15,7 +15,7 @@
  */
 package io.sdavids.commons.entity;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+import javax.annotation.Nullable;
 
 /**
  * A marker interface for an object having a {@code String} ID.

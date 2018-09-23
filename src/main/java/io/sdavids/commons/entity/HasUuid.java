@@ -16,7 +16,7 @@
 package io.sdavids.commons.entity;
 
 import java.util.UUID;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import javax.annotation.Nullable;
 
 /**
  * A marker interface for an object having a {@code UUID}.

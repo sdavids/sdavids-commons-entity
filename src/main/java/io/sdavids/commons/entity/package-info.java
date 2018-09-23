@@ -19,4 +19,7 @@
  *
  * @since 1.0
  */
+@ParametersAreNonnullByDefault
 package io.sdavids.commons.entity;
+
+import javax.annotation.ParametersAreNonnullByDefault;
