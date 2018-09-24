@@ -5,4 +5,12 @@
     xsi:schemaLocation="https://github.com/spotbugs/filter/3.0.0 https://raw.githubusercontent.com/spotbugs/spotbugs/release-3.1/spotbugs/etc/findbugsfilter.xsd">
   <!-- http://spotbugs.readthedocs.io/en/latest/filter.html -->
 
+  <Match>
+    <!-- TODO restrict to test classes - https://github.com/spotbugs/spotbugs/issues/498 -->
+    <Bug pattern="SE_BAD_FIELD"/>
+  </Match>
+  <Match>
+    <!-- TODO restrict to test classes - https://github.com/spotbugs/spotbugs/issues/498 -->
+    <Bug pattern="SIC_INNER_SHOULD_BE_STATIC"/>
+  </Match>
 </FindBugsFilter>

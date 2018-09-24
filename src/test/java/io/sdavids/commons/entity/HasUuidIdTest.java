@@ -23,87 +23,104 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import java.util.UUID;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 
 @MockitoSettings
-final class HasUuidIdTest {
+class HasUuidIdTest {
 
-  private static final UUID UUID = fromString("1833e288-f477-48f2-81da-3ce6fde82253");
+  @Nested
+  class HasId {
 
-  @Mock private HasUuidId hasUuidId;
+    @Test
+    void getIdReturnsNull() {
+      when(hasUuidId.getId()).thenReturn(null);
+      when(hasUuidId.hasId()).thenCallRealMethod();
 
-  @Test
-  void hasId_withId_null() {
-    when(hasUuidId.getId()).thenReturn(null);
-    when(hasUuidId.hasId()).thenCallRealMethod();
+      assertThat(hasUuidId.hasId()).isFalse();
+    }
 
-    assertThat(hasUuidId.hasId()).isFalse();
+    @Test
+    void getIdReturnsId() {
+      when(hasUuidId.getId()).thenReturn(fromString("0a396616-a174-4840-8eff-f266fd3fca32"));
+      when(hasUuidId.hasId()).thenCallRealMethod();
+
+      assertThat(hasUuidId.hasId()).isTrue();
+    }
   }
 
-  @Test
-  void hasId_withId() {
-    when(hasUuidId.getId()).thenReturn(UUID);
-    when(hasUuidId.hasId()).thenCallRealMethod();
+  @Nested
+  class NonNullUuidId {
 
-    assertThat(hasUuidId.hasId()).isTrue();
+    @Test
+    void withNull() {
+      assertThat(nonNullUuidId(null)).isFalse();
+    }
+
+    @Test
+    void getIdReturnsNull() {
+      when(hasUuidId.getId()).thenReturn(null);
+
+      assertThat(nonNullUuidId(hasUuidId)).isFalse();
+    }
+
+    @Test
+    void getIdReturnsValue() {
+      when(hasUuidId.getId()).thenReturn(fromString("f388fc77-040b-4642-a563-12022ee1508c"));
+
+      assertThat(nonNullUuidId(hasUuidId)).isTrue();
+    }
   }
 
-  @Test
-  void nonNullUuidId_null() {
-    assertThat(nonNullUuidId(null)).isFalse();
+  @Nested
+  class UuidIdFrom {
+
+    @Test
+    void withNull() {
+      assertThat(uuidIdFrom(null)).isNull();
+    }
+
+    @Test
+    void getIdReturnsNull() {
+      when(hasUuidId.getId()).thenReturn(null);
+
+      assertThat(uuidIdFrom(hasUuidId)).isNull();
+    }
+
+    @Test
+    void getIdReturnsValue() {
+      when(hasUuidId.getId()).thenReturn(ID);
+
+      assertThat(uuidIdFrom(hasUuidId)).isEqualTo(ID);
+    }
   }
 
-  @Test
-  void nonNullUuidId_withId_null() {
-    when(hasUuidId.getId()).thenReturn(null);
+  @Nested
+  class NullIfUuidIdNull {
 
-    assertThat(nonNullUuidId(hasUuidId)).isFalse();
+    @Test
+    void withNull() {
+      assertThat(nullIfUuidIdNull(null)).isNull();
+    }
+
+    @Test
+    void getIdReturnsNull() {
+      when(hasUuidId.getId()).thenReturn(null);
+
+      assertThat(nullIfUuidIdNull(hasUuidId)).isNull();
+    }
+
+    @Test
+    void getIdReturnsValue() {
+      when(hasUuidId.getId()).thenReturn(ID);
+
+      assertThat(nullIfUuidIdNull(hasUuidId)).isEqualTo(hasUuidId);
+    }
   }
 
-  @Test
-  void nonNullUuidId_withId() {
-    when(hasUuidId.getId()).thenReturn(UUID);
+  static final UUID ID = fromString("1833e288-f477-48f2-81da-3ce6fde82252");
 
-    assertThat(nonNullUuidId(hasUuidId)).isTrue();
-  }
-
-  @Test
-  void uuidIdFrom_null() {
-    assertThat(uuidIdFrom(null)).isNull();
-  }
-
-  @Test
-  void uuidIdFrom_hasUuidId_returns_null() {
-    when(hasUuidId.getId()).thenReturn(null);
-
-    assertThat(uuidIdFrom(hasUuidId)).isNull();
-  }
-
-  @Test
-  void uuidIdFrom_() {
-    when(hasUuidId.getId()).thenReturn(UUID);
-
-    assertThat(uuidIdFrom(hasUuidId)).isEqualTo(UUID);
-  }
-
-  @Test
-  void nullIfUuidIdNull_null() {
-    assertThat(nullIfUuidIdNull(null)).isNull();
-  }
-
-  @Test
-  void nullIfUuidIdNull_hasUuidId_returns_null() {
-    when(hasUuidId.getId()).thenReturn(null);
-
-    assertThat(nullIfUuidIdNull(hasUuidId)).isNull();
-  }
-
-  @Test
-  void nullIfUuidIdNull_() {
-    when(hasUuidId.getId()).thenReturn(UUID);
-
-    assertThat(nullIfUuidIdNull(hasUuidId)).isEqualTo(hasUuidId);
-  }
+  @Mock HasUuidId hasUuidId;
 }

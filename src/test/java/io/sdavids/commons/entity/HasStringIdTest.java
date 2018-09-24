@@ -21,87 +21,104 @@ import static io.sdavids.commons.entity.HasStringId.stringIdFrom;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 
 @MockitoSettings
-final class HasStringIdTest {
+class HasStringIdTest {
 
-  private static final String ID = "test1";
+  @Nested
+  class HasId {
 
-  @Mock private HasStringId hasStringId;
+    @Test
+    void getIdReturnsNull() {
+      when(hasStringId.getId()).thenReturn(null);
+      when(hasStringId.hasId()).thenCallRealMethod();
 
-  @Test
-  void hasId_withId_null() {
-    when(hasStringId.getId()).thenReturn(null);
-    when(hasStringId.hasId()).thenCallRealMethod();
+      assertThat(hasStringId.hasId()).isFalse();
+    }
 
-    assertThat(hasStringId.hasId()).isFalse();
+    @Test
+    void getIdReturnsId() {
+      when(hasStringId.getId()).thenReturn("ID1");
+      when(hasStringId.hasId()).thenCallRealMethod();
+
+      assertThat(hasStringId.hasId()).isTrue();
+    }
   }
 
-  @Test
-  void hasId_withId() {
-    when(hasStringId.getId()).thenReturn("test2");
-    when(hasStringId.hasId()).thenCallRealMethod();
+  @Nested
+  class NonNullStringId {
 
-    assertThat(hasStringId.hasId()).isTrue();
+    @Test
+    void withNull() {
+      assertThat(nonNullStringId(null)).isFalse();
+    }
+
+    @Test
+    void getIdReturnsNull() {
+      when(hasStringId.getId()).thenReturn(null);
+
+      assertThat(nonNullStringId(hasStringId)).isFalse();
+    }
+
+    @Test
+    void getIdReturnsValue() {
+      when(hasStringId.getId()).thenReturn("ID2");
+
+      assertThat(nonNullStringId(hasStringId)).isTrue();
+    }
   }
 
-  @Test
-  void nonNullStringId_null() {
-    assertThat(nonNullStringId(null)).isFalse();
+  @Nested
+  class StringIdFrom {
+
+    @Test
+    void withNull() {
+      assertThat(stringIdFrom(null)).isNull();
+    }
+
+    @Test
+    void getIdReturnsNull() {
+      when(hasStringId.getId()).thenReturn(null);
+
+      assertThat(stringIdFrom(hasStringId)).isNull();
+    }
+
+    @Test
+    void getIdReturnsValue() {
+      when(hasStringId.getId()).thenReturn(ID);
+
+      assertThat(stringIdFrom(hasStringId)).isEqualTo(ID);
+    }
   }
 
-  @Test
-  void nonNullStringId_withId_null() {
-    when(hasStringId.getId()).thenReturn(null);
+  @Nested
+  class NullIfStringIdNull {
 
-    assertThat(nonNullStringId(hasStringId)).isFalse();
+    @Test
+    void withNull() {
+      assertThat(nullIfStringIdNull(null)).isNull();
+    }
+
+    @Test
+    void getIdReturnsNull() {
+      when(hasStringId.getId()).thenReturn(null);
+
+      assertThat(nullIfStringIdNull(hasStringId)).isNull();
+    }
+
+    @Test
+    void getIdReturnsValue() {
+      when(hasStringId.getId()).thenReturn(ID);
+
+      assertThat(nullIfStringIdNull(hasStringId)).isEqualTo(hasStringId);
+    }
   }
 
-  @Test
-  void nonNullStringId_withId() {
-    when(hasStringId.getId()).thenReturn("test3");
+  static final String ID = "ID";
 
-    assertThat(nonNullStringId(hasStringId)).isTrue();
-  }
-
-  @Test
-  void stringIdFrom_null() {
-    assertThat(stringIdFrom(null)).isNull();
-  }
-
-  @Test
-  void stringIdFrom_hasStringId_returns_null() {
-    when(hasStringId.getId()).thenReturn(null);
-
-    assertThat(stringIdFrom(hasStringId)).isNull();
-  }
-
-  @Test
-  void stringIdFrom_() {
-    when(hasStringId.getId()).thenReturn(ID);
-
-    assertThat(stringIdFrom(hasStringId)).isEqualTo(ID);
-  }
-
-  @Test
-  void nullIfStringIdNull_null() {
-    assertThat(nullIfStringIdNull(null)).isNull();
-  }
-
-  @Test
-  void nullIfStringIdNull_hasStringId_returns_null() {
-    when(hasStringId.getId()).thenReturn(null);
-
-    assertThat(nullIfStringIdNull(hasStringId)).isNull();
-  }
-
-  @Test
-  void nullIfStringIdNull_() {
-    when(hasStringId.getId()).thenReturn(ID);
-
-    assertThat(nullIfStringIdNull(hasStringId)).isEqualTo(hasStringId);
-  }
+  @Mock HasStringId hasStringId;
 }

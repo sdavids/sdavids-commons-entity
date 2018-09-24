@@ -21,87 +21,104 @@ import static io.sdavids.commons.entity.HasLongId.nullIfLongIdNull;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 
 @MockitoSettings
-final class HasLongIdTest {
+class HasLongIdTest {
 
-  private static final long ID = 1L;
+  @Nested
+  class HasId {
 
-  @Mock private HasLongId hasLongId;
+    @Test
+    void getIdReturnsNull() {
+      when(hasLongId.getId()).thenReturn(null);
+      when(hasLongId.hasId()).thenCallRealMethod();
 
-  @Test
-  void hasId_withId_null() {
-    when(hasLongId.getId()).thenReturn(null);
-    when(hasLongId.hasId()).thenCallRealMethod();
+      assertThat(hasLongId.hasId()).isFalse();
+    }
 
-    assertThat(hasLongId.hasId()).isFalse();
+    @Test
+    void getIdReturnsId() {
+      when(hasLongId.getId()).thenReturn(2363236L);
+      when(hasLongId.hasId()).thenCallRealMethod();
+
+      assertThat(hasLongId.hasId()).isTrue();
+    }
   }
 
-  @Test
-  void hasId_withId() {
-    when(hasLongId.getId()).thenReturn(2L);
-    when(hasLongId.hasId()).thenCallRealMethod();
+  @Nested
+  class NonNullLongId {
 
-    assertThat(hasLongId.hasId()).isTrue();
+    @Test
+    void withNull() {
+      assertThat(nonNullLongId(null)).isFalse();
+    }
+
+    @Test
+    void getIdReturnsNull() {
+      when(hasLongId.getId()).thenReturn(null);
+
+      assertThat(nonNullLongId(hasLongId)).isFalse();
+    }
+
+    @Test
+    void getIdReturnsValue() {
+      when(hasLongId.getId()).thenReturn(5688344L);
+
+      assertThat(nonNullLongId(hasLongId)).isTrue();
+    }
   }
 
-  @Test
-  void nonNullLongId_null() {
-    assertThat(nonNullLongId(null)).isFalse();
+  @Nested
+  class LongIdFrom {
+
+    @Test
+    void withNull() {
+      assertThat(longIdFrom(null)).isNull();
+    }
+
+    @Test
+    void getIdReturnsNull() {
+      when(hasLongId.getId()).thenReturn(null);
+
+      assertThat(longIdFrom(hasLongId)).isNull();
+    }
+
+    @Test
+    void getIdReturnsValue() {
+      when(hasLongId.getId()).thenReturn(ID);
+
+      assertThat(longIdFrom(hasLongId)).isEqualTo(ID);
+    }
   }
 
-  @Test
-  void nonNullLongId_withId_null() {
-    when(hasLongId.getId()).thenReturn(null);
+  @Nested
+  class NullIfLongIdNull {
 
-    assertThat(nonNullLongId(hasLongId)).isFalse();
+    @Test
+    void withNull() {
+      assertThat(nullIfLongIdNull(null)).isNull();
+    }
+
+    @Test
+    void getIdReturnsNull() {
+      when(hasLongId.getId()).thenReturn(null);
+
+      assertThat(nullIfLongIdNull(hasLongId)).isNull();
+    }
+
+    @Test
+    void getIdReturnsValue() {
+      when(hasLongId.getId()).thenReturn(ID);
+
+      assertThat(nullIfLongIdNull(hasLongId)).isEqualTo(hasLongId);
+    }
   }
 
-  @Test
-  void nonNullLongId_withId() {
-    when(hasLongId.getId()).thenReturn(3L);
+  static final long ID = 347734374L;
 
-    assertThat(nonNullLongId(hasLongId)).isTrue();
-  }
-
-  @Test
-  void longIdFrom_null() {
-    assertThat(longIdFrom(null)).isNull();
-  }
-
-  @Test
-  void longIdFrom_hasLongId_returns_null() {
-    when(hasLongId.getId()).thenReturn(null);
-
-    assertThat(longIdFrom(hasLongId)).isNull();
-  }
-
-  @Test
-  void longIdFrom_() {
-    when(hasLongId.getId()).thenReturn(ID);
-
-    assertThat(longIdFrom(hasLongId)).isEqualTo(ID);
-  }
-
-  @Test
-  void nullIfLongIdNull_null() {
-    assertThat(nullIfLongIdNull(null)).isNull();
-  }
-
-  @Test
-  void nullIfLongIdNull_hasLongId_returns_null() {
-    when(hasLongId.getId()).thenReturn(null);
-
-    assertThat(nullIfLongIdNull(hasLongId)).isNull();
-  }
-
-  @Test
-  void nullIfLongIdNull_() {
-    when(hasLongId.getId()).thenReturn(ID);
-
-    assertThat(nullIfLongIdNull(hasLongId)).isEqualTo(hasLongId);
-  }
+  @Mock HasLongId hasLongId;
 }

@@ -21,87 +21,104 @@ import static io.sdavids.commons.entity.HasIntegerId.nullIfIntegerIdNull;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 
 @MockitoSettings
-final class HasIntegerIdTest {
+class HasIntegerIdTest {
 
-  private static final int ID = 2;
+  @Nested
+  class HasId {
 
-  @Mock private HasIntegerId hasIntegerId;
+    @Test
+    void getIdReturnsNull() {
+      when(hasIntegerId.getId()).thenReturn(null);
+      when(hasIntegerId.hasId()).thenCallRealMethod();
 
-  @Test
-  void hasId_withId_null() {
-    when(hasIntegerId.getId()).thenReturn(null);
-    when(hasIntegerId.hasId()).thenCallRealMethod();
+      assertThat(hasIntegerId.hasId()).isFalse();
+    }
 
-    assertThat(hasIntegerId.hasId()).isFalse();
+    @Test
+    void getIdReturnsId() {
+      when(hasIntegerId.getId()).thenReturn(43342);
+      when(hasIntegerId.hasId()).thenCallRealMethod();
+
+      assertThat(hasIntegerId.hasId()).isTrue();
+    }
   }
 
-  @Test
-  void hasId_withId() {
-    when(hasIntegerId.getId()).thenReturn(2);
-    when(hasIntegerId.hasId()).thenCallRealMethod();
+  @Nested
+  class NonNullIntegerId {
 
-    assertThat(hasIntegerId.hasId()).isTrue();
+    @Test
+    void withNull() {
+      assertThat(nonNullIntegerId(null)).isFalse();
+    }
+
+    @Test
+    void getIdReturnsNull() {
+      when(hasIntegerId.getId()).thenReturn(null);
+
+      assertThat(nonNullIntegerId(hasIntegerId)).isFalse();
+    }
+
+    @Test
+    void getIdReturnsValue() {
+      when(hasIntegerId.getId()).thenReturn(34543);
+
+      assertThat(nonNullIntegerId(hasIntegerId)).isTrue();
+    }
   }
 
-  @Test
-  void nonNullIntegerId_null() {
-    assertThat(nonNullIntegerId(null)).isFalse();
+  @Nested
+  class IntegerIdFrom {
+
+    @Test
+    void withNull() {
+      assertThat(integerIdFrom(null)).isNull();
+    }
+
+    @Test
+    void getIdReturnsNull() {
+      when(hasIntegerId.getId()).thenReturn(null);
+
+      assertThat(integerIdFrom(hasIntegerId)).isNull();
+    }
+
+    @Test
+    void getIdReturnsValue() {
+      when(hasIntegerId.getId()).thenReturn(ID);
+
+      assertThat(integerIdFrom(hasIntegerId)).isEqualTo(ID);
+    }
   }
 
-  @Test
-  void nonNullIntegerId_withId_null() {
-    when(hasIntegerId.getId()).thenReturn(null);
+  @Nested
+  class NullIfIntegerIdNull {
 
-    assertThat(nonNullIntegerId(hasIntegerId)).isFalse();
+    @Test
+    void withNull() {
+      assertThat(nullIfIntegerIdNull(null)).isNull();
+    }
+
+    @Test
+    void getIdReturnsNull() {
+      when(hasIntegerId.getId()).thenReturn(null);
+
+      assertThat(nullIfIntegerIdNull(hasIntegerId)).isNull();
+    }
+
+    @Test
+    void getIdReturnsValue() {
+      when(hasIntegerId.getId()).thenReturn(ID);
+
+      assertThat(nullIfIntegerIdNull(hasIntegerId)).isEqualTo(hasIntegerId);
+    }
   }
 
-  @Test
-  void nonNullIntegerId_withId() {
-    when(hasIntegerId.getId()).thenReturn(3);
+  static final int ID = 34662;
 
-    assertThat(nonNullIntegerId(hasIntegerId)).isTrue();
-  }
-
-  @Test
-  void integerIdFrom_null() {
-    assertThat(integerIdFrom(null)).isNull();
-  }
-
-  @Test
-  void integerIdFrom_hasIntegerId_returns_null() {
-    when(hasIntegerId.getId()).thenReturn(null);
-
-    assertThat(integerIdFrom(hasIntegerId)).isNull();
-  }
-
-  @Test
-  void integerIdFrom_() {
-    when(hasIntegerId.getId()).thenReturn(ID);
-
-    assertThat(integerIdFrom(hasIntegerId)).isEqualTo(ID);
-  }
-
-  @Test
-  void nullIfIntegerIdNull_null() {
-    assertThat(nullIfIntegerIdNull(null)).isNull();
-  }
-
-  @Test
-  void nullIfIntegerIdNull_hasIntegerId_returns_null() {
-    when(hasIntegerId.getId()).thenReturn(null);
-
-    assertThat(nullIfIntegerIdNull(hasIntegerId)).isNull();
-  }
-
-  @Test
-  void nullIfIntegerIdNull_() {
-    when(hasIntegerId.getId()).thenReturn(ID);
-
-    assertThat(nullIfIntegerIdNull(hasIntegerId)).isEqualTo(hasIntegerId);
-  }
+  @Mock HasIntegerId hasIntegerId;
 }
