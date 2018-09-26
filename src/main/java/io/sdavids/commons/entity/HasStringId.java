@@ -15,13 +15,17 @@
  */
 package io.sdavids.commons.entity;
 
+import static org.apiguardian.api.API.Status.STABLE;
+
 import javax.annotation.Nullable;
+import org.apiguardian.api.API;
 
 /**
  * A marker interface for an object having a {@code String} ID.
  *
  * @since 1.0
  */
+@API(status = STABLE, since = "1.0")
 @FunctionalInterface
 public interface HasStringId {
 
