@@ -28,6 +28,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 
+@SuppressWarnings("ClassCanBeStatic")
 @MockitoSettings
 class HasUuidIdTest {
 
@@ -35,7 +36,7 @@ class HasUuidIdTest {
   class HasId {
 
     @Test
-    void getIdReturnsNull() {
+    void getIdReturnsNull(@Mock HasUuidId hasUuidId) {
       when(hasUuidId.getId()).thenReturn(null);
       when(hasUuidId.hasId()).thenCallRealMethod();
 
@@ -43,7 +44,7 @@ class HasUuidIdTest {
     }
 
     @Test
-    void getIdReturnsId() {
+    void getIdReturnsId(@Mock HasUuidId hasUuidId) {
       when(hasUuidId.getId()).thenReturn(fromString("0a396616-a174-4840-8eff-f266fd3fca32"));
       when(hasUuidId.hasId()).thenCallRealMethod();
 
@@ -60,14 +61,14 @@ class HasUuidIdTest {
     }
 
     @Test
-    void getIdReturnsNull() {
+    void getIdReturnsNull(@Mock HasUuidId hasUuidId) {
       when(hasUuidId.getId()).thenReturn(null);
 
       assertThat(nonNullUuidId(hasUuidId)).isFalse();
     }
 
     @Test
-    void getIdReturnsValue() {
+    void getIdReturnsValue(@Mock HasUuidId hasUuidId) {
       when(hasUuidId.getId()).thenReturn(fromString("f388fc77-040b-4642-a563-12022ee1508c"));
 
       assertThat(nonNullUuidId(hasUuidId)).isTrue();
@@ -83,14 +84,14 @@ class HasUuidIdTest {
     }
 
     @Test
-    void getIdReturnsNull() {
+    void getIdReturnsNull(@Mock HasUuidId hasUuidId) {
       when(hasUuidId.getId()).thenReturn(null);
 
       assertThat(uuidIdFrom(hasUuidId)).isNull();
     }
 
     @Test
-    void getIdReturnsValue() {
+    void getIdReturnsValue(@Mock HasUuidId hasUuidId) {
       when(hasUuidId.getId()).thenReturn(ID);
 
       assertThat(uuidIdFrom(hasUuidId)).isEqualTo(ID);
@@ -106,14 +107,14 @@ class HasUuidIdTest {
     }
 
     @Test
-    void getIdReturnsNull() {
+    void getIdReturnsNull(@Mock HasUuidId hasUuidId) {
       when(hasUuidId.getId()).thenReturn(null);
 
       assertThat(nullIfUuidIdNull(hasUuidId)).isNull();
     }
 
     @Test
-    void getIdReturnsValue() {
+    void getIdReturnsValue(@Mock HasUuidId hasUuidId) {
       when(hasUuidId.getId()).thenReturn(ID);
 
       assertThat(nullIfUuidIdNull(hasUuidId)).isEqualTo(hasUuidId);
@@ -121,6 +122,4 @@ class HasUuidIdTest {
   }
 
   static final UUID ID = fromString("1833e288-f477-48f2-81da-3ce6fde82252");
-
-  @Mock HasUuidId hasUuidId;
 }

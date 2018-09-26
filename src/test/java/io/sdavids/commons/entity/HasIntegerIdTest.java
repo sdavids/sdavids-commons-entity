@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 
+@SuppressWarnings("ClassCanBeStatic")
 @MockitoSettings
 class HasIntegerIdTest {
 
@@ -33,7 +34,7 @@ class HasIntegerIdTest {
   class HasId {
 
     @Test
-    void getIdReturnsNull() {
+    void getIdReturnsNull(@Mock HasIntegerId hasIntegerId) {
       when(hasIntegerId.getId()).thenReturn(null);
       when(hasIntegerId.hasId()).thenCallRealMethod();
 
@@ -41,7 +42,7 @@ class HasIntegerIdTest {
     }
 
     @Test
-    void getIdReturnsId() {
+    void getIdReturnsId(@Mock HasIntegerId hasIntegerId) {
       when(hasIntegerId.getId()).thenReturn(43342);
       when(hasIntegerId.hasId()).thenCallRealMethod();
 
@@ -58,14 +59,14 @@ class HasIntegerIdTest {
     }
 
     @Test
-    void getIdReturnsNull() {
+    void getIdReturnsNull(@Mock HasIntegerId hasIntegerId) {
       when(hasIntegerId.getId()).thenReturn(null);
 
       assertThat(nonNullIntegerId(hasIntegerId)).isFalse();
     }
 
     @Test
-    void getIdReturnsValue() {
+    void getIdReturnsValue(@Mock HasIntegerId hasIntegerId) {
       when(hasIntegerId.getId()).thenReturn(34543);
 
       assertThat(nonNullIntegerId(hasIntegerId)).isTrue();
@@ -81,14 +82,14 @@ class HasIntegerIdTest {
     }
 
     @Test
-    void getIdReturnsNull() {
+    void getIdReturnsNull(@Mock HasIntegerId hasIntegerId) {
       when(hasIntegerId.getId()).thenReturn(null);
 
       assertThat(integerIdFrom(hasIntegerId)).isNull();
     }
 
     @Test
-    void getIdReturnsValue() {
+    void getIdReturnsValue(@Mock HasIntegerId hasIntegerId) {
       when(hasIntegerId.getId()).thenReturn(ID);
 
       assertThat(integerIdFrom(hasIntegerId)).isEqualTo(ID);
@@ -104,14 +105,14 @@ class HasIntegerIdTest {
     }
 
     @Test
-    void getIdReturnsNull() {
+    void getIdReturnsNull(@Mock HasIntegerId hasIntegerId) {
       when(hasIntegerId.getId()).thenReturn(null);
 
       assertThat(nullIfIntegerIdNull(hasIntegerId)).isNull();
     }
 
     @Test
-    void getIdReturnsValue() {
+    void getIdReturnsValue(@Mock HasIntegerId hasIntegerId) {
       when(hasIntegerId.getId()).thenReturn(ID);
 
       assertThat(nullIfIntegerIdNull(hasIntegerId)).isEqualTo(hasIntegerId);
@@ -119,6 +120,4 @@ class HasIntegerIdTest {
   }
 
   static final int ID = 34662;
-
-  @Mock HasIntegerId hasIntegerId;
 }

@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 
+@SuppressWarnings("ClassCanBeStatic")
 @MockitoSettings
 class HasLongIdTest {
 
@@ -33,7 +34,7 @@ class HasLongIdTest {
   class HasId {
 
     @Test
-    void getIdReturnsNull() {
+    void getIdReturnsNull(@Mock HasLongId hasLongId) {
       when(hasLongId.getId()).thenReturn(null);
       when(hasLongId.hasId()).thenCallRealMethod();
 
@@ -41,7 +42,7 @@ class HasLongIdTest {
     }
 
     @Test
-    void getIdReturnsId() {
+    void getIdReturnsId(@Mock HasLongId hasLongId) {
       when(hasLongId.getId()).thenReturn(2363236L);
       when(hasLongId.hasId()).thenCallRealMethod();
 
@@ -58,14 +59,14 @@ class HasLongIdTest {
     }
 
     @Test
-    void getIdReturnsNull() {
+    void getIdReturnsNull(@Mock HasLongId hasLongId) {
       when(hasLongId.getId()).thenReturn(null);
 
       assertThat(nonNullLongId(hasLongId)).isFalse();
     }
 
     @Test
-    void getIdReturnsValue() {
+    void getIdReturnsValue(@Mock HasLongId hasLongId) {
       when(hasLongId.getId()).thenReturn(5688344L);
 
       assertThat(nonNullLongId(hasLongId)).isTrue();
@@ -81,14 +82,14 @@ class HasLongIdTest {
     }
 
     @Test
-    void getIdReturnsNull() {
+    void getIdReturnsNull(@Mock HasLongId hasLongId) {
       when(hasLongId.getId()).thenReturn(null);
 
       assertThat(longIdFrom(hasLongId)).isNull();
     }
 
     @Test
-    void getIdReturnsValue() {
+    void getIdReturnsValue(@Mock HasLongId hasLongId) {
       when(hasLongId.getId()).thenReturn(ID);
 
       assertThat(longIdFrom(hasLongId)).isEqualTo(ID);
@@ -104,14 +105,14 @@ class HasLongIdTest {
     }
 
     @Test
-    void getIdReturnsNull() {
+    void getIdReturnsNull(@Mock HasLongId hasLongId) {
       when(hasLongId.getId()).thenReturn(null);
 
       assertThat(nullIfLongIdNull(hasLongId)).isNull();
     }
 
     @Test
-    void getIdReturnsValue() {
+    void getIdReturnsValue(@Mock HasLongId hasLongId) {
       when(hasLongId.getId()).thenReturn(ID);
 
       assertThat(nullIfLongIdNull(hasLongId)).isEqualTo(hasLongId);
@@ -119,6 +120,4 @@ class HasLongIdTest {
   }
 
   static final long ID = 347734374L;
-
-  @Mock HasLongId hasLongId;
 }

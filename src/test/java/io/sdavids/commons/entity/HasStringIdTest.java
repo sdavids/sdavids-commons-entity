@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 
+@SuppressWarnings("ClassCanBeStatic")
 @MockitoSettings
 class HasStringIdTest {
 
@@ -33,7 +34,7 @@ class HasStringIdTest {
   class HasId {
 
     @Test
-    void getIdReturnsNull() {
+    void getIdReturnsNull(@Mock HasStringId hasStringId) {
       when(hasStringId.getId()).thenReturn(null);
       when(hasStringId.hasId()).thenCallRealMethod();
 
@@ -41,7 +42,7 @@ class HasStringIdTest {
     }
 
     @Test
-    void getIdReturnsId() {
+    void getIdReturnsId(@Mock HasStringId hasStringId) {
       when(hasStringId.getId()).thenReturn("ID1");
       when(hasStringId.hasId()).thenCallRealMethod();
 
@@ -58,14 +59,14 @@ class HasStringIdTest {
     }
 
     @Test
-    void getIdReturnsNull() {
+    void getIdReturnsNull(@Mock HasStringId hasStringId) {
       when(hasStringId.getId()).thenReturn(null);
 
       assertThat(nonNullStringId(hasStringId)).isFalse();
     }
 
     @Test
-    void getIdReturnsValue() {
+    void getIdReturnsValue(@Mock HasStringId hasStringId) {
       when(hasStringId.getId()).thenReturn("ID2");
 
       assertThat(nonNullStringId(hasStringId)).isTrue();
@@ -81,14 +82,14 @@ class HasStringIdTest {
     }
 
     @Test
-    void getIdReturnsNull() {
+    void getIdReturnsNull(@Mock HasStringId hasStringId) {
       when(hasStringId.getId()).thenReturn(null);
 
       assertThat(stringIdFrom(hasStringId)).isNull();
     }
 
     @Test
-    void getIdReturnsValue() {
+    void getIdReturnsValue(@Mock HasStringId hasStringId) {
       when(hasStringId.getId()).thenReturn(ID);
 
       assertThat(stringIdFrom(hasStringId)).isEqualTo(ID);
@@ -104,14 +105,14 @@ class HasStringIdTest {
     }
 
     @Test
-    void getIdReturnsNull() {
+    void getIdReturnsNull(@Mock HasStringId hasStringId) {
       when(hasStringId.getId()).thenReturn(null);
 
       assertThat(nullIfStringIdNull(hasStringId)).isNull();
     }
 
     @Test
-    void getIdReturnsValue() {
+    void getIdReturnsValue(@Mock HasStringId hasStringId) {
       when(hasStringId.getId()).thenReturn(ID);
 
       assertThat(nullIfStringIdNull(hasStringId)).isEqualTo(hasStringId);
@@ -119,6 +120,4 @@ class HasStringIdTest {
   }
 
   static final String ID = "ID";
-
-  @Mock HasStringId hasStringId;
 }

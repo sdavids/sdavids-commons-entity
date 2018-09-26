@@ -215,7 +215,7 @@ spotless {
     endWithNewline()
   }
   format 'properties', {
-    target 'gradle.properties'
+    target 'gradle.properties', 'src/**/*.properties'
     encoding 'ISO-8859-1'
     trimTrailingWhitespace()
     endWithNewline()
@@ -248,6 +248,10 @@ tasks.withType(Test).configureEach {
   systemProperty 'user.language', System.properties['user.language']
   systemProperty 'user.country', System.properties['user.country']
   systemProperty 'java.awt.headless', 'true'
+
+  // TODO: https://github.com/gradle/gradle/issues/6453
+  forkEvery = 1
+  //
 
   maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
 

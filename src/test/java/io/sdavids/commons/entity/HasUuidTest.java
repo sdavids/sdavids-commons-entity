@@ -27,6 +27,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 
+@SuppressWarnings("ClassCanBeStatic")
 @MockitoSettings
 class HasUuidTest {
 
@@ -34,7 +35,7 @@ class HasUuidTest {
   class HasUuid_ {
 
     @Test
-    void getUuidReturnsNull() {
+    void getUuidReturnsNull(@Mock HasUuid hasUuid) {
       when(hasUuid.getUuid()).thenReturn(null);
       when(hasUuid.hasUuid()).thenCallRealMethod();
 
@@ -42,7 +43,7 @@ class HasUuidTest {
     }
 
     @Test
-    void getUuidReturnsUuid() {
+    void getUuidReturnsUuid(@Mock HasUuid hasUuid) {
       when(hasUuid.getUuid()).thenReturn(fromString("706054f0-9ba4-45fd-99ad-facec5275507"));
       when(hasUuid.hasUuid()).thenCallRealMethod();
 
@@ -59,14 +60,14 @@ class HasUuidTest {
     }
 
     @Test
-    void getUuidReturnsNull() {
+    void getUuidReturnsNull(@Mock HasUuid hasUuid) {
       when(hasUuid.getUuid()).thenReturn(null);
 
       assertThat(nonNullUuid(hasUuid)).isFalse();
     }
 
     @Test
-    void getUuidReturnsValue() {
+    void getUuidReturnsValue(@Mock HasUuid hasUuid) {
       when(hasUuid.getUuid()).thenReturn(fromString("1a24a0fb-6c46-42e7-a3cf-9b1648b8e94f"));
 
       assertThat(nonNullUuid(hasUuid)).isTrue();
@@ -82,14 +83,14 @@ class HasUuidTest {
     }
 
     @Test
-    void getUuidReturnsNull() {
+    void getUuidReturnsNull(@Mock HasUuid hasUuid) {
       when(hasUuid.getUuid()).thenReturn(null);
 
       assertThat(uuidFrom(hasUuid)).isNull();
     }
 
     @Test
-    void getUuidReturnsValue() {
+    void getUuidReturnsValue(@Mock HasUuid hasUuid) {
       when(hasUuid.getUuid()).thenReturn(ID);
 
       assertThat(uuidFrom(hasUuid)).isEqualTo(ID);
@@ -97,6 +98,4 @@ class HasUuidTest {
   }
 
   static final UUID ID = fromString("a9495cf6-5f29-49ee-8b28-72505f68b5ab");
-
-  @Mock HasUuid hasUuid;
 }
