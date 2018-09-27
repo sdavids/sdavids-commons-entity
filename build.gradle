@@ -210,6 +210,10 @@ if (project.hasProperty('createReports')) {
   }
 }
 
+animalsniffer {
+  cache.enabled = true
+}
+
 tasks.withType(CheckForbiddenApis).configureEach {
   bundledSignatures = [
       'jdk-internal',
